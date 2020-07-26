@@ -21,33 +21,17 @@ import retrofit2.Response;
 public class Presenter implements PresenterInterface {
 
     private Repository repository;
-    private ApiService apiService;
     private ViewInterface viewInterface;
-    private List<MarsObject> marsObjectList = new ArrayList<>();
 
-    public Presenter(Application application, ViewInterface viewInterface) {
-        repository = new Repository(application);
+    public Presenter(ViewInterface viewInterface) {
+        repository = new Repository();
         this.viewInterface = viewInterface;
-        apiService = ApiClient.getRetrofitInstance().create(ApiService.class);
     }
 
 
     @Override
-    public List<MarsObject> getFetchData() {
-        Call<List<MarsObject>> call = apiService.getMarsData();
-        call.enqueue(new Callback<List<MarsObject>>() {
-            @Override
-            public void onResponse(Call<List<MarsObject>> call, Response<List<MarsObject>> response) {
-                viewInterface.showFetchData(response.body());
-                Log.d("RESPONSE", response.body().get(0).getImgSrc());
-            }
-
-            @Override
-            public void onFailure(Call<List<MarsObject>> call, Throwable t) {
-               viewInterface.showErrorOnData(t);
-            }
-        });
-        return marsObjectList;
+    public LiveData<List<MarsObject>> fetchLivedata() {
+        return repository.fetchMarsData();
     }
 
 }

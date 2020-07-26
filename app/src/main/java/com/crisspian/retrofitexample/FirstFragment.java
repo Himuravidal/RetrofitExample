@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class FirstFragment extends Fragment  implements ViewInterface, MarsObjec
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new Presenter(getActivity().getApplication(), this);
+        presenter = new Presenter( this);
         adapter = new MarsObjectAdapter(this);
     }
 
@@ -47,7 +48,16 @@ public class FirstFragment extends Fragment  implements ViewInterface, MarsObjec
         recyclerView = binding.rvContainer;
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(adapter);
-        presenter.getFetchData();
+        //presenter.getFetchData();
+
+        presenter.fetchLivedata().observe(getViewLifecycleOwner(), new Observer<List<MarsObject>>() {
+            @Override
+            public void onChanged(List<MarsObject> marsObjectList) {
+                adapter.updateMarsObject(marsObjectList);
+            }
+        });
+
+
         return binding.getRoot();
     }
 
