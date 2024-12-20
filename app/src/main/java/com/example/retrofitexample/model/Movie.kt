@@ -9,7 +9,7 @@ data class Movie(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @Json(name = "genre_ids")
     val genreIds: List<Int>,
     @Json(name = "id")
@@ -23,7 +23,7 @@ data class Movie(
     @Json(name = "popularity")
     val popularity: Double,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @Json(name = "release_date")
     val releaseDate: String,
     @Json(name = "title")
@@ -34,4 +34,8 @@ data class Movie(
     val voteAverage: Double,
     @Json(name = "vote_count")
     val voteCount: Int
-)
+) {
+    fun poster(): String? = posterPath?.let {
+        "https://image.tmdb.org/t/p/w500$it"
+    }
+}

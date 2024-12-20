@@ -9,7 +9,12 @@ interface MovieApi {
     @GET("movie/popular")
     suspend fun getPopularMovies(
         @Query("page") page:  Int = 1,
-        @Query("api_key") apiKey: String
+    ): MovieResponse
+
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1
     ): MovieResponse
 
 }
