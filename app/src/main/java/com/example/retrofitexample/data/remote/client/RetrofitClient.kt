@@ -1,7 +1,7 @@
-package com.example.retrofitexample.model
+package com.example.retrofitexample.data.remote.client
 
 import com.example.retrofitexample.BuildConfig
-import com.example.retrofitexample.model.api.MovieApi
+import com.example.retrofitexample.data.remote.api.MovieApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

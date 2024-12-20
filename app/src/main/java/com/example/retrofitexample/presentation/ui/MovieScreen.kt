@@ -1,4 +1,4 @@
-package com.example.retrofitexample
+package com.example.retrofitexample.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.example.retrofitexample.model.Movie
+import com.example.retrofitexample.domain.model.Movie
+import com.example.retrofitexample.presentation.viewmodel.MovieViewModel
 
 @Composable
 fun MovieScreen(
@@ -67,7 +68,7 @@ fun MovieItem(movie: Movie) {
             Text(movie.title)
             Spacer(modifier = Modifier.padding(16.dp))
             AsyncImage(
-                model = movie.poster(),
+                model = movie.posterUrl,
                 contentDescription = ""
             )
             Spacer(modifier = Modifier.padding(16.dp))

@@ -1,11 +1,11 @@
-package com.example.retrofitexample.model
+package com.example.retrofitexample.data.remote.dto
 
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Movie(
+data class MovieDto(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")
@@ -34,8 +34,4 @@ data class Movie(
     val voteAverage: Double,
     @Json(name = "vote_count")
     val voteCount: Int
-) {
-    fun poster(): String? = posterPath?.let {
-        "https://image.tmdb.org/t/p/w500$it"
-    }
-}
+)
